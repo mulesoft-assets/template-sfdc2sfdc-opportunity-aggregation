@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.api.config.MuleProperties;
 import org.mule.tck.junit4.FunctionalTestCase;
@@ -53,8 +54,8 @@ public class FlowsTest extends FunctionalTestCase {
 	}
 
 	@Test
+	@Ignore
 	public void testAFlow() throws Exception {
-		// Assert.assertTrue("You should really be adding tests to your templates.",
-		// true);
+		Assert.assertTrue("You should really be adding tests to your templates.", false);
 	}
 }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.mule.templates</groupId>
 	<artifactId>sfdc2sfdc-opportunity-aggregation</artifactId>
 	<packaging>mule</packaging>
 	<version>1.0.0-SNAPSHOT</version>
-    <name>opportunity-aggregation Anypoint Template Project</name>
+	<name>opportunity-aggregation Anypoint Template Project</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +16,7 @@
 		<mule.version>3.5.0-M4</mule.version>
 		<munit.version>3.5-M1</munit.version>
 		<junit.version>4.9</junit.version>
-		
+
 		<eclipsePluginVersion>2.8</eclipsePluginVersion>
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
@@ -53,7 +54,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -76,6 +77,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<useFile>false</useFile>
 					<additionalClasspathElements>
 						<additionalClasspathElement>${MULE_HOME}/conf/</additionalClasspathElement>
 						<!-- Location of the mule licence in Bamboo muleLicenseKey.lic -->
@@ -103,13 +105,13 @@
 				<extensions>true</extensions>
 				<configuration>
 					<copyToAppsDirectory>true</copyToAppsDirectory>
-				<inclusions>
-                        <inclusion>
-                            <groupId>org.mule.modules</groupId>
-                            <artifactId>mule-module-sfdc</artifactId>
-                        </inclusion>
-                    </inclusions>
-                </configuration>
+					<inclusions>
+						<inclusion>
+							<groupId>org.mule.modules</groupId>
+							<artifactId>mule-module-sfdc</artifactId>
+						</inclusion>
+					</inclusions>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -221,7 +223,8 @@
 						<configuration>
 							<tasks>
 								<!-- Using an ant task to deflate cloveretl-engine.zip -->
-								<unzip dest="${project.build.testOutputDirectory}" src="${project.build.testOutputDirectory}/cloveretl-engine.zip"/>
+								<unzip dest="${project.build.testOutputDirectory}"
+									src="${project.build.testOutputDirectory}/cloveretl-engine.zip" />
 							</tasks>
 						</configuration>
 						<goals>
@@ -430,9 +433,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Connectors -->
-
-
 		<!-- for testing -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -471,7 +471,7 @@
 			<scope>test</scope>
 			<type>test-jar</type>
 		</dependency>
-		
+
 		<!-- Munit -->
 		<dependency>
 			<groupId>org.mule.munit</groupId>
@@ -485,7 +485,6 @@
 			<version>${munit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>mockobjects</groupId>
 			<artifactId>mockobjects-core</artifactId>
@@ -498,12 +497,14 @@
 			<version>2.7.1</version>
 			<scope>test</scope>
 		</dependency>
-	<dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-sfdc</artifactId>
-            <version>5.4.5-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+
+		<!-- Connectors -->
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-sfdc</artifactId>
+			<version>5.4.5</version>
+		</dependency>
+	</dependencies>
 
 	<repositories>
 		<repository>
