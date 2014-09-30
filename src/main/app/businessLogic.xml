@@ -23,7 +23,7 @@ This flow should control the direction of the application, and it should be call
         </enricher>
  
         <enricher source="#[payload]" target="#[flowVars['opportunitiesFromOrgB']]" doc:name="Store result in FlowVar 'opportunitiesFromOrgB'">
-            <sfdc:query config-ref="SalesforceB" query="dsql:SELECT Id, Name, Amount FROM Opportunity" doc:name="query all opportunities from SalesForce instance A"/>
+            <sfdc:query config-ref="SalesforceB" query="dsql:SELECT Id, Name, Amount FROM Opportunity" doc:name="query all opportunities from SalesForce instance B"/>
         </enricher>
     </sub-flow>
 
