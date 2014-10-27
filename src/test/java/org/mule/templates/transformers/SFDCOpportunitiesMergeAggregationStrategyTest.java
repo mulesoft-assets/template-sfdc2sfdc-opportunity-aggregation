@@ -8,6 +8,7 @@ package org.mule.templates.transformers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -18,27 +19,42 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mule.api.MuleContext;
-import org.mule.api.transformer.TransformerException;
+import org.mule.api.MuleEvent;
+import org.mule.api.routing.AggregationContext;
+import org.mule.templates.integration.AbstractTemplateTestCase;
+
+import com.google.common.collect.Lists;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SFDCOpportunitiesMergeTest {
+public class SFDCOpportunitiesMergeAggregationStrategyTest extends AbstractTemplateTestCase {
+
 	@Mock
 	private MuleContext muleContext;
-
+	
 	@Test
-	@SuppressWarnings("unchecked")
-	public void testMerge() throws TransformerException {
+	public void testAggregate() throws Exception {
 		List<Map<String, String>> opportunitiesA = createOpportunityList("A", 0, 1);
 		List<Map<String, String>> opportunitiesB = createOpportunityList("B", 1, 2);
+		
+		MuleEvent testOriginalEvent = getTestEvent("");
+		MuleEvent testEventA = getTestEvent("");
+		MuleEvent testEventB = getTestEvent("");
+		
+		testEventA.getMessage().setPayload(opportunitiesA.iterator());
+		testEventB.getMessage().setPayload(opportunitiesB.iterator());
+		
+		List<MuleEvent> testEvents = new ArrayList<MuleEvent>();
+		testEvents.add(testEventA);
+		testEvents.add(testEventB);
+		
+		AggregationContext aggregationContext = new AggregationContext(testOriginalEvent, testEvents);
+		
+		SFDCOpportunitiesMergeAggregationStrategy sfdcOpportunityMerge = new SFDCOpportunitiesMergeAggregationStrategy();
+		List<Map<String, String>> mergedList = Lists.newArrayList((Iterator<Map<String, String>>) sfdcOpportunityMerge.aggregate(aggregationContext).getMessage().getPayload());
 
-		SFDCOpportunitiesMerge sfdcOpportunitiesMerge = new SFDCOpportunitiesMerge();
-		List<Map<String, String>> mergedList = (List<Map<String, String>>) sfdcOpportunitiesMerge.mergeList(opportunitiesA, opportunitiesB);
-
-		System.out.println(opportunitiesA);
-		System.out.println(opportunitiesB);
 		System.out.println(mergedList);
-
 		Assert.assertEquals("The merged list obtained is not as expected", createExpectedList(), mergedList);
+
 	}
 
 	private List<Map<String, String>> createExpectedList() {

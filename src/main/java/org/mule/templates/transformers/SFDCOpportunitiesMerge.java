@@ -8,41 +8,18 @@ package org.mule.templates.transformers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.mule.api.MuleMessage;
-import org.mule.api.transformer.TransformerException;
-import org.mule.transformer.AbstractMessageTransformer;
-
-import com.google.common.collect.Lists;
-
 /**
- * This transformer will take two lists as input and create a third one that
+ * The object of this class will take two lists as input and create a third one that
  * will be the merge of the previous two. The identity of list's element is
  * defined by its Name.
  * 
  * @author damian.sima
  */
-public class SFDCOpportunitiesMerge extends AbstractMessageTransformer {
+public class SFDCOpportunitiesMerge {
 	private static final String IDENTITY_FIELD_KEY = "Name";
-
-	private static final String OPPORTUNITIES_COMPANY_A = "opportunitiesFromOrgA";
-	private static final String OPPORTUNITIES_COMPANY_B = "opportunitiesFromOrgB";
-
-	@Override
-	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-
-		List<Map<String, String>> mergedUsersList = mergeList(getAccountsList(message, OPPORTUNITIES_COMPANY_A), getAccountsList(message, OPPORTUNITIES_COMPANY_B));
-
-		return mergedUsersList;
-	}
-
-	private List<Map<String, String>> getAccountsList(MuleMessage message, String propertyName) {
-		Iterator<Map<String, String>> iterator = message.getInvocationProperty(propertyName);
-		return Lists.newArrayList(iterator);
-	}
 
 	/**
 	 * The method will merge the accounts from the two lists creating a new one.
@@ -53,35 +30,32 @@ public class SFDCOpportunitiesMerge extends AbstractMessageTransformer {
 	 *            opportunities from organization B
 	 * @return a list with the merged content of the to input lists
 	 */
-	private List<Map<String, String>> mergeList(List<Map<String, String>> opportunitiesFromOrgA, List<Map<String, String>> opportunitiesFromOrgB) {
-		List<Map<String, String>> mergedAccountList = new ArrayList<Map<String, String>>();
+	public List<Map<String, String>> mergeList(List<Map<String, String>> opportunitiesFromOrgA, List<Map<String, String>> opportunitiesFromOrgB) {
+		List<Map<String, String>> mergedOpportunityList = new ArrayList<Map<String, String>>();
 
-		// Put all accounts from A in the merged contactList
-		for (Map<String, String> accountFromA : opportunitiesFromOrgA) {
-			Map<String, String> mergedAccount = createMergedOpportunity(accountFromA);
-			mergedAccount.put("IDInA", accountFromA.get("Id"));
-//			mergedAccount.put("NameInA", accountFromA.get("Name"));
-			mergedAccount.put("AmountInA", accountFromA.get("Amount"));
-			mergedAccountList.add(mergedAccount);
+		// Put all opportunities from A in the merged opportunityList
+		for (Map<String, String> opportunityFromA : opportunitiesFromOrgA) {
+			Map<String, String> mergedOpportunity = createMergedOpportunity(opportunityFromA);
+			mergedOpportunity.put("IDInA", opportunityFromA.get("Id"));
+			mergedOpportunity.put("AmountInA", opportunityFromA.get("Amount"));
+			mergedOpportunityList.add(mergedOpportunity);
 		}
 
-		// Add the new accounts from B and update the exiting ones
+		// Add the new opportunities from B and update the exiting ones
 		for (Map<String, String> opportunityFromB : opportunitiesFromOrgB) {
-			Map<String, String> mergedAccount = findOpportunityInList(opportunityFromB, mergedAccountList);
-			if (mergedAccount != null) {
-				mergedAccount.put("IDInB", opportunityFromB.get("Id"));
-//				mergedAccount.put("NameInB", opportunityFromB.get("Name"));
-				mergedAccount.put("AmountInB", opportunityFromB.get("Amount"));
+			Map<String, String> mergedOpportunity = findOpportunityInList(opportunityFromB, mergedOpportunityList);
+			if (mergedOpportunity != null) {
+				mergedOpportunity.put("IDInB", opportunityFromB.get("Id"));
+				mergedOpportunity.put("AmountInB", opportunityFromB.get("Amount"));
 			} else {
-				mergedAccount = createMergedOpportunity(opportunityFromB);
-				mergedAccount.put("IDInB", opportunityFromB.get("Id"));
-//				mergedAccount.put("NameInB", opportunityFromB.get("Name"));
-				mergedAccount.put("AmountInB", opportunityFromB.get("Amount"));
-				mergedAccountList.add(mergedAccount);
+				mergedOpportunity = createMergedOpportunity(opportunityFromB);
+				mergedOpportunity.put("IDInB", opportunityFromB.get("Id"));
+				mergedOpportunity.put("AmountInB", opportunityFromB.get("Amount"));
+				mergedOpportunityList.add(mergedOpportunity);
 			}
 
 		}
-		return mergedAccountList;
+		return mergedOpportunityList;
 	}
 
 	private Map<String, String> createMergedOpportunity(Map<String, String> opportunity) {

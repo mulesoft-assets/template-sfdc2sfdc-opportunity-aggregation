@@ -8,6 +8,7 @@ package org.mule.templates.transformers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+
+import com.google.common.collect.Lists;
 
 /**
  * The test validates that the {@link SortOpportunitiesList} properly order a
@@ -37,11 +40,10 @@ public class SortOpportunitiesListTest {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void testSort() throws TransformerException {
-		List<Map<String, String>> originalList = createOriginalList();
-		MuleMessage message = new DefaultMuleMessage(originalList, muleContext);
+		MuleMessage message = new DefaultMuleMessage(createOriginalList().iterator(), muleContext);
 
 		SortOpportunitiesList transformer = new SortOpportunitiesList();
-		List<Map<String, String>> sortedList = (List<Map<String, String>>) transformer.transform(message, "UTF-8");
+		List<Map<String, String>> sortedList = Lists.newArrayList((Iterator<Map<String, String>>) transformer.transform(message, "UTF-8"));
 
 		Assert.assertEquals("The merged list obtained is not as expected", createExpectedList(), sortedList);
 

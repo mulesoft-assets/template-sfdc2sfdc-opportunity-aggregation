@@ -8,7 +8,6 @@ package org.mule.templates.integration;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Date;
 import java.util.Properties;
 
 import org.junit.Rule;
@@ -73,17 +72,6 @@ public abstract class AbstractTemplateTestCase extends FunctionalTestCase {
 		properties.put(MuleProperties.APP_HOME_DIRECTORY_PROPERTY, graphFile.getAbsolutePath());
 
 		return properties;
-	}
-
-	protected String buildUniqueName(String templateName, String name) {
-		String timeStamp = new Long(new Date().getTime()).toString();
-
-		StringBuilder builder = new StringBuilder();
-		builder.append(name);
-		builder.append(templateName);
-		builder.append(timeStamp);
-
-		return builder.toString();
 	}
 
 }
