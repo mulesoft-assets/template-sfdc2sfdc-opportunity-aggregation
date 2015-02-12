@@ -32,6 +32,7 @@ public class SFDCOpportunitiesMergeAggregationStrategyTest extends AbstractTempl
 	private MuleContext muleContext;
 	
 	@Test
+	@SuppressWarnings("unchecked")
 	public void testAggregate() throws Exception {
 		List<Map<String, String>> opportunitiesA = createOpportunityList("A", 0, 1);
 		List<Map<String, String>> opportunitiesB = createOpportunityList("B", 1, 2);
