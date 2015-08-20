@@ -52,6 +52,7 @@ public class SFDCOpportunitiesMergeAggregationStrategy implements AggregationStr
 		return new DefaultMuleEvent(message, originalEvent);
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<Map<String, String>> getAccountsList(List<MuleEvent> events, int index) {
 		Iterator<Map<String, String>> iterator = (Iterator<Map<String, String>>) events.get(index).getMessage().getPayload();
 		return Lists.newArrayList(iterator);

@@ -13,6 +13,8 @@ import java.util.Map;
 
 import junit.framework.Assert;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -20,13 +22,16 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.mule.api.MuleContext;
 import org.mule.api.transformer.TransformerException;
 
+@SuppressWarnings("deprecation")
 @RunWith(MockitoJUnitRunner.class)
 public class SFDCOpportunitiesMergeTest {
+
+	private final static Logger LOGGER = LogManager.getLogger(SFDCOpportunitiesMergeTest.class);
+	
 	@Mock
 	private MuleContext muleContext;
 
 	@Test
-	@SuppressWarnings("unchecked")
 	public void testMerge() throws TransformerException {
 		List<Map<String, String>> opportunitiesA = createOpportunityList("A", 0, 1);
 		List<Map<String, String>> opportunitiesB = createOpportunityList("B", 1, 2);
@@ -34,9 +39,9 @@ public class SFDCOpportunitiesMergeTest {
 		SFDCOpportunitiesMerge sfdcOpportunitiesMerge = new SFDCOpportunitiesMerge();
 		List<Map<String, String>> mergedList = (List<Map<String, String>>) sfdcOpportunitiesMerge.mergeList(opportunitiesA, opportunitiesB);
 
-		System.out.println(opportunitiesA);
-		System.out.println(opportunitiesB);
-		System.out.println(mergedList);
+		LOGGER.info(opportunitiesA);
+		LOGGER.info(opportunitiesB);
+		LOGGER.info(mergedList);
 
 		Assert.assertEquals("The merged list obtained is not as expected", createExpectedList(), mergedList);
 	}

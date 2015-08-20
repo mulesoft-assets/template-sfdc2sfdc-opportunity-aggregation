@@ -52,13 +52,10 @@ public class BusinessLogicIT extends AbstractTemplateTestCase {
 		deleteTestOpportunitiesFromSandBox(createdOpportunitiesInB, "deleteOpportunityFromBFlow");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testGatherDataFlow() throws Exception {
-		SubflowInterceptingChainLifecycleWrapper flow = getSubFlow("gatherDataFlow");
-		flow.setMuleContext(muleContext);
-		flow.initialise();
-		flow.start();
-		MuleEvent event = flow.process(getTestEvent("", MessageExchangePattern.REQUEST_RESPONSE));
+		MuleEvent event = runFlow("gatherDataFlow");
 		List<Map<String, String>> mergedOpportunityList = Lists.newArrayList((Iterator<Map<String, String>>)event.getMessage().getPayload());
 		Assert.assertTrue("There should be opportunities from source A or source B.", mergedOpportunityList.size() != 0);
 	}

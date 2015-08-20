@@ -17,10 +17,12 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
+import org.mule.api.config.MuleConfiguration;
 import org.mule.api.transformer.TransformerException;
 
 import com.google.common.collect.Lists;
@@ -31,15 +33,22 @@ import com.google.common.collect.Lists;
  * 
  * @author damiansima
  */
+@SuppressWarnings("deprecation")
 @RunWith(MockitoJUnitRunner.class)
 public class SortOpportunitiesListTest {
 
 	@Mock
 	private MuleContext muleContext;
 
+	@Mock
+	private MuleConfiguration muleConfiguration;
+	
 	@Test
 	@SuppressWarnings("unchecked")
 	public void testSort() throws TransformerException {
+		Mockito.when(muleContext.getConfiguration()).thenReturn(muleConfiguration);
+		Mockito.when(muleConfiguration.getDefaultEncoding()).thenReturn("UTF-8");
+		
 		MuleMessage message = new DefaultMuleMessage(createOriginalList().iterator(), muleContext);
 
 		SortOpportunitiesList transformer = new SortOpportunitiesList();
