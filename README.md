@@ -1,5 +1,5 @@
 
-# Anypoint Template: Salesforce to Salesforce Opportunity Aggregation
+# Anypoint Template: Salesforce and Salesforce Opportunity Aggregation
 
 + [License Agreement](#licenseagreement)
 + [Use Case](#usecase)
@@ -89,7 +89,7 @@ There are no particular considerations for this Anypoint Template regarding Sale
 
 
 # Run it! <a name="runit"/>
-Simple steps to get Salesforce to Salesforce Opportunity Aggregation running.
+Simple steps to get Salesforce and Salesforce Opportunity Aggregation running.
 
 
 ## Running on premise <a name="runonopremise"/>
@@ -153,7 +153,7 @@ In order to use this Mule Anypoint Template you need to configure properties (Cr
 + sfdc.b.securityToken `ces56arl7apQs56XTddf34X`
 + sfdc.b.url `https://login.salesforce.com/services/Soap/u/32.0`
 
-#### SMPT Services configuration
+#### SMTP Services configuration
 + smtp.host `smtp.gmail.com`
 + smtp.port `587`
 + smtp.user `exampleuser@gmail.com`

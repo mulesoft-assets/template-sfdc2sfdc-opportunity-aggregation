@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <flow-ref name="mainFlow" doc:name="Call mainFlow" doc:description="mainFlow"/>
     </flow>
 
-	<!-- In this file you should declare all your inbound endpoints and control an access to your application -->
+	<!-- In this file you should declare all your inbound endpoints and control and access to your application -->
 
     
      <flow name="outboundFlow"  doc:description="This is the simpliest output point to push the result of the data processing. 

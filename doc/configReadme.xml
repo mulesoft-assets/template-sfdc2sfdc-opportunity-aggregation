@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <configuration>
 	<placeholders>
-		<placeholder id="template_name">Salesforce to Salesforce Opportunity Aggregation</placeholder>
+		<placeholder id="template_name">Salesforce and Salesforce Opportunity Aggregation</placeholder>
 	</placeholders>
 	<sections>
 		<section id="use_case">
@@ -44,7 +44,7 @@ After this, to trigger the use case you just need to hit the local http endpoint
 + sfdc.b.securityToken `ces56arl7apQs56XTddf34X`
 + sfdc.b.url `https://login.salesforce.com/services/Soap/u/32.0`
 
-#### SMPT Services configuration
+#### SMTP Services configuration
 + smtp.host `smtp.gmail.com`
 + smtp.port `587`
 + smtp.user `exampleuser@gmail.com`
