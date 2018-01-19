@@ -9,8 +9,8 @@
         see them in the mule_ee.log file. -->
 
     <Appenders>
-        <RollingFile name="file" fileName="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}template-sfdc2sfdc-account-aggregation.log" 
-                 filePattern="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}template-sfdc2sfdc-account-aggregation-%i.log">
+        <RollingFile name="file" fileName="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}template-sfdc2sfdc-opportunity-aggregation.log" 
+                 filePattern="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}template-sfdc2sfdc-opportunity-aggregation-%i.log">
             <PatternLayout pattern="%d [%t] %-5p %c - %m%n" />
             <SizeBasedTriggeringPolicy size="10 MB" />
             <DefaultRolloverStrategy max="10"/>
