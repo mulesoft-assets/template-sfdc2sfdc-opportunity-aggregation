@@ -35,7 +35,7 @@ As implemented, it gets opportunities from two instances of Salesforce, compares
 
 # Considerations <a name="considerations"/>
 
-To make this Anypoint Template run, there are certain preconditions that must be considered. All of them deal with the preparations in both, that must be made in order for all to run smoothly. **Failling to do so could lead to unexpected behavior of the template.**
+To make this Anypoint Template run, there are certain preconditions that must be considered. All of them deal with the preparations in both, that must be made in order for all to run smoothly. **Failing to do so could lead to unexpected behavior of the template.**
 
 
 
@@ -107,10 +107,8 @@ First thing to know if you are a newcomer to Mule is where to get the tools.
 ### Importing an Anypoint Template into Studio
 Mule Studio offers several ways to import a project into the workspace, for instance: 
 
-+ Anypoint Studio generated Deployable Archive (.zip)
-+ Anypoint Studio Project from External Location
-+ Maven-based Mule Project from pom.xml
-+ Mule ESB Configuration XML from External Location
++ Anypoint Studio Project from File System
++ Packaged mule application (.jar)
 
 You can find a detailed description on how to do so in this [Documentation Page](http://www.mulesoft.org/documentation/display/current/Importing+and+Exporting+in+Studio).
 
@@ -140,29 +138,30 @@ Mule Studio provides you with really easy way to deploy your Template directly t
 ## Properties to be configured (With examples) <a name="propertiestobeconfigured"/>
 In order to use this Mule Anypoint Template you need to configure properties (Credentials, configurations, etc.) either in properties file or in CloudHub as Environment Variables. Detail list with examples:
 ### Application configuration
+**HTTP Connector configuration**
 + http.port `9090` 
 
-#### SalesForce Connector configuration for company A
+**SalesForce Connector configuration for company A**
 + sfdc.a.username `bob.dylan@orga`
 + sfdc.a.password `DylanPassword123`
 + sfdc.a.securityToken `avsfwCUl7apQs56Xq2AKi3X`
 + sfdc.a.url `https://login.salesforce.com/services/Soap/u/40.0`
 
-#### SalesForce Connector configuration for company B
+**SalesForce Connector configuration for company B**
 + sfdc.b.username `joan.baez@orgb`
 + sfdc.b.password `JoanBaez456`
 + sfdc.b.securityToken `ces56arl7apQs56XTddf34X`
 + sfdc.b.url `https://login.salesforce.com/services/Soap/u/40.0`
 
-#### SMTP Services configuration
+**SMTP Services configuration**
 + smtp.host `smtp.gmail.com`
 + smtp.port `587`
 + smtp.user `exampleuser@gmail.com`
 + smtp.password `ExamplePassword456`
 
-#### Mail details
-+ mail.from `exampleuser@gmail.com`
-+ mail.to `woody.guthrie@gmail.com`
+**Mail details**
++ mail.from `exampleuser1@gmail.com`
++ mail.to `exampleuser2@gmail.com`
 + mail.subject `Opportunities Report`
 + mail.body `Please find attached your Opportunities Report`
 + attachment.name `opportunities_report`
@@ -191,7 +190,7 @@ In the visual editor they can be found on the *Global Element* tab.
 
 
 ## businessLogic.xml<a name="businesslogicxml"/>
-Functional aspect of the Template is implemented on this XML, directed by one flow responsible of conducting the aggregation of data, comparing records and finally formating the output, in this case being a report.
+Functional aspect of the Template is implemented on this XML, directed by one flow responsible of conducting the aggregation of data, comparing records and finally formatting the output, in this case being a report.
 
 Using Scatter-Gather component we are querying the data in different systems. After that the aggregation is implemented in DataWeave 2 script using Transform component.
 Aggregated results are sorted by source of existence:
@@ -200,7 +199,7 @@ Aggregated results are sorted by source of existence:
 2. Opportunities only in Salesforce B
 3. Opportunities in both Salesforce A and Salesforce B
 
-and transformed to CSV format. Final report in CSV format is sent to email, that you configured in mule.*.properties file.
+and transformed to CSV format. Final report in CSV format is sent to email, that you configured in mule.\*.properties file.
 
 
 
