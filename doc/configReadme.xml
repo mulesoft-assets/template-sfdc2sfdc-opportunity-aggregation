@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version='1.0' encoding='utf-8'?>
 <configuration>
 	<placeholders>
 		<placeholder id="template_name">Salesforce and Salesforce Opportunity Aggregation</placeholder>
@@ -9,28 +9,28 @@ As a Salesforce admin I want to aggregate opportunities from two Salesforce Inst
 
 For practical purposes this Template will generate the result in the format of a CSV Report sent by mail.
 
-This Template should serve as a foundation for extracting data from two systems, aggregating data, comparing values of fields for the objects, and generating a report on the differences. 
+This template serves as a foundation for extracting data from two systems, aggregating data, comparing values of fields for the objects, and generating a report on the differences. 
 
 As implemented, it gets opportunities from two instances of Salesforce, compares by the email address of the opportunities, and generates a CSV file which shows opportunities in A, opportunities in B, and opportunities in A and B. The report is then send by email to a configured group of email addresses.
 		</section>
 		<section id="considerations">
-<![CDATA[
-To make this Anypoint Template run, there are certain preconditions that must be considered. All of them deal with the preparations in both, that must be made in order for all to run smoothly. **Failing to do so could lead to unexpected behavior of the template.**
-]]>
+
+To make this template run, there are certain preconditions that must be considered. All of them deal with the preparations in both, that must be made for the template to run smoothly. **Failing to do so could lead to unexpected behavior of the template.**
+
 		</section>
 		<section id="running_on_cloudhub">
-<![CDATA[
-Once your app is all set and started, supposing you choose as domain name `sfdc2sfdc-opportunity-aggregation` to trigger the use case you just need to hit `http://sfdc2sfdc-opportunity-aggregation.cloudhub.io/generatereport` and report will be sent to the emails configured.
-]]>
+
+Once your app is all set and started, supposing you choose as domain name `sfdc2sfdc-opportunity-aggregation` to trigger the use case you just need to browse to `http://sfdc2sfdc-opportunity-aggregation.cloudhub.io/generatereport` and report will be sent to the emails configured.
+
 		</section>
 		<section id="running_on_standalone">
-<![CDATA[
-After this, to trigger the use case you just need to hit the local http endpoint with the port you configured in your file. If this is, for instance, `9090` then you should hit: `http://localhost:9090/generatereport` and this will create a CSV report and send it to the mails set.
-]]>
+
+After this, to trigger the use case you just need to browse to the local http endpoint with the port you configured in your file. If this is, for instance, `9090` then you should browse to: `http://localhost:9090/generatereport` and this will create a CSV report and send it to the mails set.
+
 		</section>
 		<section id="application_configuration">
-		<![CDATA[
-**HTTP Connector configuration**
+		
+**HTTP Connector Configuration**
 + http.port `9090` 
 
 **SalesForce Connector configuration for company A**
@@ -45,7 +45,7 @@ After this, to trigger the use case you just need to hit the local http endpoint
 + sfdc.b.securityToken `ces56arl7apQs56XTddf34X`
 + sfdc.b.url `https://login.salesforce.com/services/Soap/u/40.0`
 
-**SMTP Services configuration**
+**SMTP Services Configuration**
 + smtp.host `smtp.gmail.com`
 + smtp.port `587`
 + smtp.user `exampleuser@gmail.com`
@@ -57,16 +57,16 @@ After this, to trigger the use case you just need to hit the local http endpoint
 + mail.subject `Opportunities Report`
 + mail.body `Please find attached your Opportunities Report`
 + attachment.name `opportunities_report`
-]]>
+
 		</section>
 		<section id="api_calls">
-		<![CDATA[
+		
 Salesforce imposes limits on the number of API Calls that can be made. However, we make API call to Salesforce only once during aggregation. 
-]]>
+
 		</section>
 		<section id="default_endpoints_xml">
-		<![CDATA[
-This is the file where you will found the endpoint to start the aggregation. This Template has an HTTP Inbound Endpoint as the way to trigger the use case.
+		
+This file provides the endpoint to start the aggregation. This Template has an HTTP Inbound Endpoint as the way to trigger the use case.
 
 $H$H# Trigger Flow
 **HTTP Inbound Endpoint** - Start Report Generation
@@ -74,10 +74,10 @@ $H$H# Trigger Flow
 + The path configured by default is `generatereport` and you are free to change for the one you prefer.
 + The host name for all endpoints in your CloudHub configuration should be defined as `localhost`. CloudHub will then route requests from your application domain URL to the endpoint.
 
-]]>
+
 		</section>
 		<section id="default_business_logic_xml">
-		<![CDATA[
+		
 Functional aspect of the Template is implemented on this XML, directed by one flow responsible of conducting the aggregation of data, comparing records and finally formatting the output, in this case being a report.
 
 Using Scatter-Gather component we are querying the data in different systems. After that the aggregation is implemented in DataWeave 2 script using Transform component.
@@ -88,7 +88,7 @@ Aggregated results are sorted by source of existence:
 3. Opportunities in both Salesforce A and Salesforce B
 
 and transformed to CSV format. Final report in CSV format is sent to email, that you configured in mule.\*.properties file.
-]]>
+
 		</section>
 	</sections>
 </configuration>
