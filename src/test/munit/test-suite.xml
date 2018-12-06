@@ -110,7 +110,7 @@ payload filter ($.Name == vars.testDataA.Name or $.Name == vars.testDataB.Name o
 		<salesforce:delete doc:name="Delete test data from instance A" doc:id="64f42f33-df2b-420a-8eac-0c7d92d7814e" config-ref="Salesforce_Sfdc_A_config">
 			<salesforce:delete-ids ><![CDATA[#[vars.sfdcAIds]]]></salesforce:delete-ids>
 		</salesforce:delete>
-		<salesforce:delete doc:name="Delete test data from instance A" doc:id="42817ae7-d355-4e39-97d3-9251b676a55e" config-ref="Salesforce_Sfdc_B_config" >
+		<salesforce:delete doc:name="Delete test data from instance B" doc:id="42817ae7-d355-4e39-97d3-9251b676a55e" config-ref="Salesforce_Sfdc_B_config" >
 			<salesforce:delete-ids ><![CDATA[#[vars.sfdcBIds]]]></salesforce:delete-ids>
 		</salesforce:delete>
    </munit:after-test>
